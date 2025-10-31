@@ -4,7 +4,7 @@
 - Containers
 
 ## Table of Contents
-- [STL - Standard Template Library](#stl-standard-template-library)
+- [STL - Standard Template Library](#stl---standard-template-library)
 - [Containers](#containers)
 - [Algorithms](#algorithms)
 - [More things](#more-things)
