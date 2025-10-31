@@ -22,12 +22,39 @@ Componentes principales de la STL:
 
 Los contenedores son estructuras de datos que se utilizan para almacenar objetos y datos. Cada contenedor se implementa como una template class que a su vez puede contener métodos para realizar operaciones básicas en él. Todos los contenedores STL se definen dentro de su propio archivo header.  
 4 tipos de contenedores:
-- Sequence Containers: `vector`, `deque`, `list`, `forward list`, `array
+- Sequence Containers: `vector`, `deque`, `list`, `forward list`, `array`
 - Container Adaptors: `stack`, `queue`, `priority queue`
 - Associative Containers: `set`, `multiset`, `map`, `multimap`
 - Unordered Associated Containers: `unordered set`, `unordered multiset`, `unordered map`, `unordered multimap`.
 
 -> EXPLICAR DIFERENCIAS ENTRE DIFERENTES TIPOS DE CONTAINERS
+#### Vectors
+
+#### Lists
+- Cada elemento es accesible por su posición en la secuencia ordenada linear.
+- Cada elemento guarda infor sobre la uicación del elemento previo y del siguiente.
+- They are very similar to forward_list: The main difference being that forward_list objects are single-linked lists, and thus they can only be iterated forwards, in exchange for being somewhat smaller and more efficient.
+- Compared to other base standard sequence containers, lists perform better in inserting, extracting and moving elements
+
+
+#### Forward list
+
+
+#### Deque
+- double-ended queue
+- contenedores secuenciales con tamaños dinámicos que se pueden expandir o contraer desde sus dos extremos (front y back).
+- no garantiza que todos los elementos estén almacenados en direcciones de memoria contiguas, por lo que no se puede acceder a los elementos moviendo un puntero de sitio.
+- Both vectors and deques provide a very similar interface and can be used for similar purposes, but internally both work in quite different ways: While vectors use a single array that needs to be occasionally reallocated for growth, the elements of a deque can be scattered in different chunks of storage, with the container keeping the necessary information internally to provide direct access to any of its elements in constant time and with a uniform sequential interface (through iterators). Therefore, deques are a little more complex internally than vectors, but this allows them to grow more efficiently under certain circumstances, especially with very long sequences, where reallocations become more expensive. NO ENTIENDO
+
+#### Array
+- Fixed-size sequence containers
+- Orden en estricta secuencia linear
+- contiguos storage: los elementos están almacenados en ubicaciones de memoria contiguas. Un puntero a un elemento puede utilizarse para acceder al resto de elementos.
+- tiene el operador[]
+- alocación de memoria estática. El tamaño del array es una constante en tiempo de compilación. No cambia de tamaño, entiendo.
+
+
+
 
 -> muchos de estos containers tienen funciones miembro compartidos, como:
 - begin: iterador que devuelve un iterador al principio del container (primer elemento)
@@ -48,9 +75,6 @@ Vector:
       myVector.insert(my.Vector.end(), //insertion pos (at the end)
                       arr, //begining of the range
                       arr + sizeof(arra) / sizeof(int)); //end of the range (not included)
-
-
-List: cada elemento es accesible por su posición en la secuencia ordenada linear. Cada elemento guarda infor sobre la uicación del elemento previo y del siguiente. 
 
 
 ### Algorithms
