@@ -62,7 +62,7 @@ Los contenedores son estructuras de datos que se utilizan para almacenar objetos
 
 #### Lists
 - Cada elemento es accesible por su posición en la secuencia ordenada linear.
-- Cada elemento guarda infor sobre la uicación del elemento previo y del siguiente.
+- Cada elemento guarda infor sobre la ubicación del elemento previo y del siguiente.
 - They are very similar to forward_list: The main difference being that forward_list objects are single-linked lists, and thus they can only be iterated forwards, in exchange for being somewhat smaller and more efficient.
 - Compared to other base standard sequence containers, lists perform better in inserting, extracting and moving elements
 
