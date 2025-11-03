@@ -100,7 +100,7 @@ Los iteradores son los punteros que se usan para apuntar a las direcciones de me
 
 
 ## More info
-[STL - geeksforgeeks](#https://www.geeksforgeeks.org/cpp/the-c-standard-template-library-stl/)  
-[Containers Library - cppreference](#https://en.cppreference.com/w/cpp/container.html)  
-[Interator - cppreference](#https://en.cppreference.com/w/cpp/iterator/iterator.html)  
-[cplusplus - Standard C++ Library reference](#https://cplusplus.com/reference/#google_vignette)  
+[STL - geeksforgeeks](https://www.geeksforgeeks.org/cpp/the-c-standard-template-library-stl/)  
+[Containers Library - cppreference](https://en.cppreference.com/w/cpp/container.html)  
+[Interator - cppreference](https://en.cppreference.com/w/cpp/iterator/iterator.html)  
+[cplusplus - Standard C++ Library reference](https://cplusplus.com/reference/#google_vignette)  
