@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   easyfind.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: amacarul <amacarul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 10:29:49 by root              #+#    #+#             */
-/*   Updated: 2025/10/31 11:47:44 by root             ###   ########.fr       */
+/*   Updated: 2025/11/03 12:31:28 by amacarul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
  * @brief   Thrown when the toFind element is not found in the container
  *          in the function easyfind().
  */
-
 class   notFoundException : public std::exception
 {
     public:
@@ -43,10 +42,7 @@ class   notFoundException : public std::exception
  *          Además, std::find devuelve un iterador...
  *          Si no hay concidencias, se puede throwear una excepción o
  *          devolver un error value
- * 
- *          
  */
-
 template <typename T>
 typename T::iterator   easyfind(T &container, int toFind)
 {

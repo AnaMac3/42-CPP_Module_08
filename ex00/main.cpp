@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: amacarul <amacarul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 10:29:56 by root              #+#    #+#             */
-/*   Updated: 2025/10/31 12:03:38 by root             ###   ########.fr       */
+/*   Updated: 2025/11/03 12:30:48 by amacarul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "easyfind.hpp"
 # include <vector>
 # include <list>
+# include <deque>
 
 # define RED "\033[31m"
 # define GREEN "\033[32m"
@@ -109,5 +110,39 @@ int main()
 	}
 	
 	//------------------------ DEQUE ------------------------
-	
+	std::cout << std::endl;
+	std::cout << "=== DEQUE ===" << std::endl;
+	std::deque<int> myDeque;
+	myDeque.push_back(12);
+	myDeque.push_back(13);
+	myDeque.push_back(14);
+	std::cout << "myDeque content: " << std::endl;
+	for (std::deque<int>::iterator it = myDeque.begin(); it != myDeque.end(); it ++)
+    {
+        std::cout << *it << " ";
+    }
+	std::cout << std::endl;
+	//easyfind()
+	std::cout << "try to find 13: " << std::endl;
+	try
+	{
+		std::deque<int>::iterator res = easyfind(myDeque, 13);
+		std::cout << GREEN << "result: " << *res << RESET << std::endl;
+		
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << RED << e.what() << RESET << std::endl;
+	}
+	std::cout << "try to find 30: " << std::endl;
+	try
+	{
+		std::deque<int>::iterator res = easyfind(myDeque, 300);
+		std::cout << GREEN << "result: " << *res << RESET << std::endl;
+		
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << RED << e.what() << RESET << std::endl;
+	}
 }
