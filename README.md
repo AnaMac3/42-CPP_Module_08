@@ -53,6 +53,12 @@ Los contenedores son estructuras de datos que se utilizan para almacenar objetos
 
 -> EXPLICAR DIFERENCIAS ENTRE DIFERENTES TIPOS DE CONTAINERS
 #### Vectors
+- dinamic size array
+- los elementos se almacenan de manera contigua -> los elementos se pueden acceder no solo a partir de iteradores, sino tb mediante offsets a punteros regulares a elementos
+- se puede usar la función reserve() para eliminar realocaciones en el número de elemento
+
+- reserve: increase the capacity of the vector (the total number of elements that the vector can hold wthout requiring reallocation). no crea elementos. No impone un límite de tamaño. Solo sirve para evitar realocaciones innecesarias cuando ya sabes cuántos elementos vas a tener. es más por eficiencia que por otra cosa.
+- size(): en vector: devuelve el numero de elementos actuales
 
 #### Lists
 - Cada elemento es accesible por su posición en la secuencia ordenada linear.
@@ -86,7 +92,7 @@ Los contenedores son estructuras de datos que se utilizan para almacenar objetos
 - front: referencia al primer elemento
 - back: referencia al último elemento
 - operator[]:
-- ...
+
 
 Vector:
 
