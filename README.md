@@ -22,15 +22,34 @@ Componentes principales de la STL:
 
 Los contenedores son estructuras de datos que se utilizan para almacenar objetos y datos. Cada contenedor se implementa como una template class que a su vez puede contener métodos para realizar operaciones básicas en él. Todos los contenedores STL se definen dentro de su propio archivo header.  
 4 tipos de contenedores:
-- **Sequence Containers**: implement data structures which can be accessed sequentially. , `deque`, `list`, `forward list`, 
-| `array` | fixed-sized inplace contiguous array |
+- **Sequence Containers**: implement data structures which can be accessed sequentially
+
+| Container | Description |
+|-----------|------------|
+| `array` | fixed-sized inplace contiguous array -> HAY ARRAY EN C++98?? |
 | `vector` | resizable contiguous array |
 | `deque` | double-ended queue |
 | `list` | doubly-linked list |
 
-- Container Adaptors: `stack`, `queue`, `priority queue`
-- Associative Containers: `set`, `multiset`, `map`, `multimap`
-- Unordered Associated Containers: `unordered set`, `unordered multiset`, `unordered map`, `unordered multimap`.
+- **Associative Containers**: implement sorted data structures that can be quickly searched (O(log n) complexity)
+
+| Container | Description |
+|-----------|------------|
+| `set` | collection of unique keys, sorted by keys |
+| `multiset` | collection of keys, sorted by keys |
+| `map` | collection of key-value pairs, sorted by keys, keys are unique |
+| `multimap` | collecton of key-vaklye pairs, sorted by keys |
+
+- **Container Adaptors**: provide a different interface for sequential containers 
+
+| Container | Description |
+|-----------|------------|
+| `stack` | adapts a container to provide stack (LIFO data structure)|
+| `queue` | adapts a container to provide queue (FIFO data structure)|
+| `priority queue` | adapts a container to provide a priority queue |
+
+- **Unordered Associated Containers**: implement unsorted (hashed) data structures that can be quickly searched ...???
+ `unordered set`, `unordered multiset`, `unordered map`, `unordered multimap`. Son de C++11, creo, no tocan en C++98??
 
 -> EXPLICAR DIFERENCIAS ENTRE DIFERENTES TIPOS DE CONTAINERS
 #### Vectors
