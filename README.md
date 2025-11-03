@@ -126,7 +126,9 @@ Los algoritmos STL ofrecen funciones para realizar operaciones comunes en datos,
 
 ### Iterators
 Los iteradores son los punteros que se usan para apuntar a las direcciones de memoria de los containers STL. Se encuentran en el header <iterator>.   
-
+- Los diferentes containers tienen diferentes tipos de iteradores
+- funciones relacionadas con iteradores?
+  - std::distance
 
 
 ## More info
