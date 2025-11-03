@@ -22,10 +22,15 @@ Componentes principales de la STL:
 
 Los contenedores son estructuras de datos que se utilizan para almacenar objetos y datos. Cada contenedor se implementa como una template class que a su vez puede contener métodos para realizar operaciones básicas en él. Todos los contenedores STL se definen dentro de su propio archivo header.  
 4 tipos de contenedores:
-- Sequence Containers: `vector`, `deque`, `list`, `forward list`, `array`
+- Sequence Containers: implement data structures which can be accessed sequentially. `vector`, `deque`, `list`, `forward list`, `array`
 - Container Adaptors: `stack`, `queue`, `priority queue`
 - Associative Containers: `set`, `multiset`, `map`, `multimap`
 - Unordered Associated Containers: `unordered set`, `unordered multiset`, `unordered map`, `unordered multimap`.
+
+|Sequence containers|
+|-------------------|
+| Implement data structures which can be accessed sequentially |
+| **array** | fixed |
 
 -> EXPLICAR DIFERENCIAS ENTRE DIFERENTES TIPOS DE CONTAINERS
 #### Vectors
