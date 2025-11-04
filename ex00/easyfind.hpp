@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   easyfind.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amacarul <amacarul@student.42.fr>          +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 10:29:49 by root              #+#    #+#             */
-/*   Updated: 2025/11/03 12:31:28 by amacarul         ###   ########.fr       */
+/*   Updated: 2025/11/04 18:04:18 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,11 @@
 
 /**
  * @class   notFoundException
- * @brief   Thrown when the toFind element is not found in the container
- *          in the function easyfind().
+ * @brief   Exception thrown when the specified element is not found in the
+ *          container.
+ *          This exception is used by the easyfind() template function to
+ *          indicate that the target integer value could not be located within
+ *          the given container.
  */
 class   notFoundException : public std::exception
 {
@@ -32,16 +35,19 @@ class   notFoundException : public std::exception
 };
 
 /**
- * @brief   Function template that accepts a type T. 
- *          It takes two parameters: the first one is of type T, and
- *          the second one is an integer
- *          La función tiene que encontrar la primera ocurrencia del
- *          segundo parámetro en el primer parámetro - hacemos que devuelva
- *          un puntero lógico al elemento encontrado dentro del contenedor,
- *          es decir, tiene que devolver un T::iterator.
- *          Además, std::find devuelve un iterador...
- *          Si no hay concidencias, se puede throwear una excepción o
- *          devolver un error value
+ * @brief   Searches for the first occurence of a given integer in a container.
+ *          - Uses std::find to locate the first occurence of an integer
+ *          value inside a container. This returns an iterator pointing to the
+ *          found element. 
+ *          - If the element is not found (std::find returns container.end() 
+ *          iterator) this function throws an excetion
+ * @tparam T    The container type. It must support begin(), end(), and
+ *              the comparison operator (==) with int (be careful with associative
+ *              containers)
+ * @param container Reference to the container to be searched
+ * @param toFind    The integer value to search for
+ * @return  An iterator pointing to the first occurence of the searched value
+ * @throws  notFoundException if the integer is not found in the container
  */
 template <typename T>
 typename T::iterator   easyfind(T &container, int toFind)

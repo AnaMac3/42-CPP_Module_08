@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amacarul <amacarul@student.42.fr>          +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 14:08:23 by amacarul          #+#    #+#             */
-/*   Updated: 2025/11/03 17:26:00 by amacarul         ###   ########.fr       */
+/*   Updated: 2025/11/04 18:27:16 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,24 @@ int main()
     {
         mySpan2.addRange(array, array + 5);
         mySpan2.printSpan();
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << RED << e.what() << RESET << std::endl;
+    }
+    //shortestSpan
+    try
+    {
+        std::cout << "shortest span: " << mySpan2.shortestSpan() << std::endl;;
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << RED << e.what() << RESET << std::endl;
+    }
+    //longestSpan
+    try
+    {
+        std::cout << "longest span: " << mySpan2.longestSpan() << std::endl;;
     }
     catch(const std::exception& e)
     {

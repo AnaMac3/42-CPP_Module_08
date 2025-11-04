@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   Span.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amacarul <amacarul@student.42.fr>          +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 14:08:09 by amacarul          #+#    #+#             */
-/*   Updated: 2025/11/03 17:25:33 by amacarul         ###   ########.fr       */
+/*   Updated: 2025/11/04 18:25:02 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Span.hpp"
 
 /**
- * @brief	Default constructor	
+ * @brief	Default constructor.
+ * 			Initializes an empty Span.
  *
  */
 Span::Span() :	_N(0),
@@ -23,9 +24,9 @@ Span::Span() :	_N(0),
 }
 
 /**
- * @brief	Constructor	with n parameter
+ * @brief	Constructs a Span with a given maximum capacity
  * 
- * @param n	Number of elements to allocate
+ * @param n	The maximum number of integers that can be stored
  */
 Span::Span(unsigned int n) :	_N(n)
 {
@@ -33,8 +34,7 @@ Span::Span(unsigned int n) :	_N(n)
 }
 
 /**
- * @brief	Copy constructor
- * 			???????¿?¿?¿?¿?¿ COMO DEBERIA HACER LA COPIA BIEN HECHA?
+ * @brief	Copy constructor. Creates a new Span as a copy of another
  *
  * @param other	Reference to object to copy from
  */
@@ -45,8 +45,9 @@ Span::Span(const Span& other) : _N(other._N)
 
 /**
  * @brief	Assignment operator	
- * 			Replaces the current Span contents with a deep copy of	
- * 			another Span
+ * 			Replaces the current contents with those of another.
+ * 			
+ * 			Note: std::vector does shallow copy with = operator
  *
  * @param other	Reference to object to copy from
  * @return	Reference o the current object
@@ -56,6 +57,7 @@ Span&	Span::operator=(const Span& other)
 	if (this != &other)
 	{
 		this->_N = other._N;
+		_data.reserve(this->_N);
 		this->_data = other._data;
 	}
 	return (*this);
@@ -72,10 +74,10 @@ Span::~Span()
 //------------------------ Member functions             ------------------------
 
 /**
- * @brief	añade un único número al Span
- * 			Si el tamaño actual de _data supera 
- * 			si ya hay N elements en el Span, throw an exception
- *
+ * @brief	Adds a single integer to the Span
+ * 
+ * @param value	The integer to add
+ * @throws	LimitMaxWException	If the Span is already full
  */
 
 void	Span::addNumber(int value)
@@ -87,10 +89,11 @@ void	Span::addNumber(int value)
 }
 
 /**
- * @brief	returns la diferencia mínima entre los valores del span
- * 			si no hay dos numeros, devuelve error
- * 			NO ESTOY SEGURA DE SI DEBE EVITAR DEVOLVER 0 SI ES QUE LOS DOS VALORES MINIMOS SON EL MISMO
+ * @brief	Computes the shortest distance (smalles difference) between any two
+ * 			stored numbers
  * 
+ * @return	The smalles difference between two numbers
+ * @throws NotEnoughElementsException	If fewer than two numbers are stored
  */
 int Span::shortestSpan() const
 {
@@ -105,8 +108,11 @@ int Span::shortestSpan() const
 }
 
 /**
- * @brief	
+ * @brief	Computes the longest distance (largest difference) between the
+ * 			minimun and maximum stored numbers
  * 
+ * @return	The largest difference between any two numbers
+ * @throws NotEnoughElementsException	If fewer than two numbers are stored.
  */
 int Span::longestSpan() const
 {
@@ -114,7 +120,6 @@ int Span::longestSpan() const
 		throw NotEnoughElementsException();
 	else
 	{
-		//ME SALE NO SUITABLE USER DEFINITION CONVERSION, POR QUÉ?=
 		std::vector<int>::const_iterator maxIter = std::max_element(_data.begin(), _data.end());
 		std::vector<int>::const_iterator minIter = std::min_element(_data.begin(), _data.end());
 		int maxValue = *maxIter;
@@ -125,7 +130,7 @@ int Span::longestSpan() const
 }
 
 /**
- * @brief
+ * @brief	Prints all stored numbers to standard output
  * 
  */
 void	Span::printSpan() const
@@ -151,5 +156,5 @@ const char* Span::LimitMaxException::what() const throw()
  */
 const char* Span::NotEnoughElementsException::what() const throw()
 {
-	return("Less than two elements in the span. Cannot calculate span.");
+	return("Cannot compute span: the container myst have at least two elements.");
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Span.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amacarul <amacarul@student.42.fr>          +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 14:08:27 by amacarul          #+#    #+#             */
-/*   Updated: 2025/11/03 17:22:26 by amacarul         ###   ########.fr       */
+/*   Updated: 2025/11/04 18:17:43 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,25 +23,22 @@
 
 /**
  * @class	Span
- * @brief	can store a max of N integers. 
- * 			N is unsigned int 
- * 			UTILIZAR UN CONTAINER, CUÁL ME CONVIENE? 
- * 			COSAS QUE TIENE QUE PODER HACER:
- * 			- RESERVAR MEMORIIA PARA N ELEMENTOS (?)
- * 			- AÑADIR ELEMENTOS
- * 			- COMPROBAR EL TAMAÑO ACTUAL DEL CONTAINER (CUÁNTOS ELEMENTOS HAY
- * 			DENTRO DEL CONTAINER)
- * 			- COMPARAR LOS VALORES DE LOS ELEMENTOS, ENCONTRAR EL MENOR Y MAYOR SPAN ?
- * 
- * 			TESTEARLO CON AL MENOS 10.000 NÚMEROS
+ * @brief	Stores up to N integer values and allows computation of the
+ * 			shortest and longest spans (differences) between stored numbers.
+ * 			The Span class internally uses a std::vector<int> as its
+ * 			container, because:
+ * 			- It supports reserving memory using reserve()
+ * 			- It allows element insertion with push_back() and insert()
+ * 			- It provides size() for tracking the number of stored elements
+ * 			- It works well with <algorithm> functions such as std::sort, 
+ * 			std::min_element, std::max_element
  * 			
- * 			USAR RANGE OF ITERATORS -> OTRA MEMBER FUNCTION PARA ADD MULTIPLE NUMBERS
- *		
- * 			Se elige el container vector porque:
- * 			- Permite hacer reserve()
- * 			- Permite añadir elementos mediante push_back, insert
- * 			- tiene size()
- * 			- Permite buscar minimos y máximos con <algorithm>
+ * 			The class can:
+ * 			- Store up to N elements
+ * 			- Add individual or multiple numbers (via iterator range)
+ * 			- Compute the shortest and longest span between stored numnbers
+ * 			- Throw exceptions when limits are exceeded or insufficient
+ * 			elements exist (for calculating shortest/longest span)
  */
 class Span
 {
@@ -63,37 +60,45 @@ class Span
 		void	printSpan() const;
 
 		/**
-		 * @brief	Añadir range of iterators, multiples numbers a la vez
-		 * 			NO ESTOY SEGURA SID DEBERIA PASARSELE CON ARRAY DE INTS
-		 * 			COMO ES ESO DE RANGE OF ITERATORS?
-		 * 			dudas:
-		 * 				- por qué se aumenta it antes y no después? esto no hace que el primer elemento del rango no se añada?
-		 * 				- en c++98 no se puede usar insert¿?
+		 * @brief	Adds multiple numbers at one using a range of iterators.
+		 * 			The function inserts all elements between two iterators
+		 * 			(begin, end). 
+		 * 			It checks whether the number of elements being inserted
+		 * 			would exceed the Span's capacity
+		 * 
+		 * @tparam T	Iterator type
+		 * @param begin	Iterator pointing to the first element of the range
+		 * @param last	Iterator pointing to the last element of the range
+		 * @throws LimitMaxException	If inserting would exceed the maximum
+		 * 								capacity
 		 */
 		template <typename T>
-		void	addRange(T begin, T end)
+		void	addRange(T begin, T last)
 		{
-			size_t range = std::distance(begin, end);
+			size_t range = std::distance(begin, last);
 			if (_data.size() + range > _N)
 				throw LimitMaxException();
-			for (T it = begin; it != end; ++it)
+			for (T it = begin; it != last; ++it)
 			{
 				_data.push_back(*it);
 			}
 		}
-		//Exceptions
+
 		/**
-		 * @class	FullSpanException
-		 * @brief	Thrown when trying to add a number when the span is full	
+		 * @class	LimitMaxException
+		 * @brief	Thrown when attempting to add an element beyond the Span's
+		 * 			maximum capacity	
 		 */
 		class	LimitMaxException : public std::exception
 		{
 			public:
 				const char* what() const throw();
 		};
+		
 		/**
-		 * @class	FullSpanException
-		 * @brief	Thrown when trying to add a number when the span is full	
+		 * @class	NotEnoughElementException
+		 * @brief	Thrown when attempting to calculate a span with fewer than
+		 * 			two stored elements	
 		 */
 		class	NotEnoughElementsException : public std::exception
 		{
