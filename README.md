@@ -106,6 +106,29 @@ Vector:
                       arr, //begining of the range
                       arr + sizeof(arra) / sizeof(int)); //end of the range (not included)
 
+#### Stack
+`std::stack` class is a **container adaptor** that gives the programmer the functionality of a stack - LIFO (last-in, first-out) data structure.  
+**Nota para el ex02**: std::stack normalmente usa de std::deque<T> internamente. Los iteradores de stack no son accesibles directamente, pero el contenedor subyacente, que se llama c (protected en std::stack), sí los tiene. 
+https://en.cppreference.com/w/cpp/container/stack.html  
+**Member types de Stack:**
+- container_type: container
+- value_type: container::value_type
+- size_type: container::size_type
+- reference: container::reference
+- const_reference: container::const_reference
+
+**Member objects de Stack:**
+- c: the underlying container
+
+**Member functions de Stack:**
+- top: accesses the top element
+- empty: checks whether the contaienr adaptor is empty
+- size: returns the number of elements
+- push: inserts element at the top
+- push_range: inserts a range of elements at the top
+- emplace: constructs element in-place at the top
+- pop: removes the top element
+- swap: swaps the contents
 
 ### Algorithms
 Los algoritmos STL ofrecen funciones para realizar operaciones comunes en datos, normalmente en contenedores. Todos los algoritmso STL están definidos en los headers `<algoritm>` y `<numeric>`. Algunos de los algoritmos más frecuentes, son:
