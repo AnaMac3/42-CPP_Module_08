@@ -55,9 +55,11 @@ Container adaptors provide a simplified interficebuilt on top of existing sequen
 
 ⚠️ For detailed information on each container, visit [cppreference.com - Containers](https://en.cppreference.com/w/cpp/container.html)
 
-
-
-#### Stack
+### Containers utilizados en este módulo
+#### `vector`
+explicar por qué, cómo, etc.  
+qué más hemos usado???  
+#### `stack` 
 `std::stack` class is a **container adaptor** that gives the programmer the functionality of a stack - LIFO (last-in, first-out) data structure.  
 **Nota para el ex02**: std::stack normalmente usa de std::deque<T> internamente. Los iteradores de stack no son accesibles directamente, pero el contenedor subyacente, que se llama c (protected en std::stack), sí los tiene. 
 https://en.cppreference.com/w/cpp/container/stack.html  
