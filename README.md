@@ -45,7 +45,7 @@ They allow fast lookup, insertion, and removal with logarithmic complexity (`O(l
 | `multimap` | Collecton of key-vaklue pairs, sorted by keys (duplicates allowed). |
 
 #### 3. Container Adaptors
-Container adaptors provide a simplified interficebuilt on top of existing sequence containers.
+Container adaptors provide a simplified interface built on top of existing sequence containers.
 
 | Adaptor | Description |
 |-----------|------------|
@@ -69,6 +69,14 @@ https://en.cppreference.com/w/cpp/container/stack.html
 - size_type: container::size_type
 - reference: container::reference
 - const_reference: container::const_reference
+
+Cómo hemos hecho lo de iterator:  
+
+    typedef typename std::stack<T>::container_type::iterator iterator
+
+Esto crea un alias de tipo llamado iterator.  
+std::stack es un container adaptor que internamente usa std::deque<T>, pero no expone iteradores.  
+Se puede accedder al tipo del contenedor interno mediante `std::stack<T>container_type`. Y con ::iterator accedemos al iterador de ese contenedor interno.
 
 **Member objects de Stack:**
 - c: the underlying container
