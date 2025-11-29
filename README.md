@@ -16,7 +16,6 @@
   - [Algorithms used in Module 08](algorithms-used-in-module-08)
 - [Iterators](iterators)
   - [Iterators used in Module 08](iterators-used-in-module-08)
-- [More things](#more-things)
 - [More info](#more-info)
 
 ### STL - Standard Template Library
