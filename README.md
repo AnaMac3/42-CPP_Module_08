@@ -18,17 +18,17 @@
   - [Iterators used in Module 08](iterators-used-in-module-08)
 - [More info](#more-info)
 
-### STL - Standard Template Library
+## STL - Standard Template Library
 The **STL (Standard Template Library)** is part of the C++ Standard Library. It provides a collection of template-based classes and functions that implement common data structures and algorithms.  
 Main componentes of the STL:
 - **Containers**: classes that store and orgaize data(`vector`, `list`, `map`, `set`, etc.)
 - **Algorithms**: generic functions that operate on ranges (`sort`, `find`, `count`, `copy`, etc.)
 - **Iterators**: generalized pointers used to traverse the elements in containers and apply algorithms.
 
-### Containers
+## Containers
 Containers are **template classes** that store collections of objects. They provide methods for basic operations such as insertion, deletion, and accesing elements.  
 In C++98, containers are divided into three main categories (unordered containers were added later in C++11):
-#### Sequence Containers
+### Sequence Containers
 Sequence containers implement data structures which can be accessed sequentially, in **linear order**.
 
 | Container | Description |
@@ -39,7 +39,7 @@ Sequence containers implement data structures which can be accessed sequentially
 
 Note: the `array` container was introduced in C++11.
 
-#### Associative Containers
+### Associative Containers
 Associative containers store in a **sorted structure**, typically implemented as balance binary trees.  
 They allow fast lookup, insertion, and removal with logarithmic complexity (`O(log n))`).
 
@@ -50,7 +50,7 @@ They allow fast lookup, insertion, and removal with logarithmic complexity (`O(l
 | `map` | Collection of key-value pairs, sorted by keys. Keys are unique. |
 | `multimap` | Collecton of key-vaklue pairs, sorted by keys (duplicates allowed). |
 
-#### Container Adaptors
+### Container Adaptors
 Container adaptors provide a simplified interface built on top of existing sequence containers.
 
 | Adaptor | Description |
@@ -61,8 +61,8 @@ Container adaptors provide a simplified interface built on top of existing seque
 
 ⚠️ For detailed information on each container, visit [cppreference.com - Containers](https://en.cppreference.com/w/cpp/container.html)
 
-### Containers used in Module 08
-#### [`std::vector`](https://en.cppreference.com/w/cpp/container/vector.html)
+## Containers used in Module 08
+### [`std::vector`](https://en.cppreference.com/w/cpp/container/vector.html)
 **`std::vector `** is a **sequence container** that stores elements in **contiguous memory**, providing dynamic array functionality. 
   Characteristics:
   - Fully **contigous memory**
@@ -80,21 +80,21 @@ Why `vector` is suitable for *Span*:
 - Supports random access via `operator[]`
 - It works well with <algorithm> functions, such as `sort`, `min_element` and `max_element`.
 
-#### [`std::stack`](https://en.cppreference.com/w/cpp/container/stack.html)
+### [`std::stack`](https://en.cppreference.com/w/cpp/container/stack.html)
 `std::stack` is a **container adaptor** that gives the programmer the functionality of a stack - **LIFO (last-in, first-out)** data structure -.  
 Used in **ex02 (MutantStack)** to build a stack with iterator support.  
 - `std::stack` **does not expose iterators**.
 - However, the underlying container (accesible as the protected member `c`) is typically a `std::deque<T>`, which does provide iterators. 
 - To expose the iterators of the underlying countainer, MutantStack inhertis from `std::stack` and uses:
 
-    typedef typename std::stack<T>::container_type::iterator iterator
+        typedef typename std::stack<T>::container_type::iterator iterator
 
 Explanation:  
 - `std::stack<T>container_type` is the protected type alias refering to the internal container (`std::deque<T>`).
 - `::iterator` gives access to that container's iterator type
 - MutantStack exposes these iterators through public `begin()` and `end()` methods
 
-### Algorithms
+## Algorithms
 STL algorithms are defined mainly in `<algorithm>`and `<numeric>`. They operate on **iterator ranges** (`[first, last]`), not containers, which is what makes them generic.  
 Common algorithms include:
 - `sort`: sorts a range
@@ -107,7 +107,7 @@ Common algorithms include:
 - `upper_bound`: finds the first element > a given value in a sorted range
 - `replace`: replaces all occurences of a value
 
-#### Algorithms used in Module 08
+### Algorithms used in Module 08
 
 | Algorithm | Declaration | Parameters | Description |
 |-----------|-------------|-------------|-------------|
@@ -116,12 +116,12 @@ Common algorithms include:
 | [`std::max_element`](https://en.cppreference.com/w/cpp/algorithm/max_element.html) | `Forward It max_element( ForwardIt first, ForwardIt last)`| `first`, `last`: the pair of iterators defining the range of elements to examine. | Returns an iterator to the largest element in the range `[first, last]`, or `last if the range is empty. |
 | [`std::min_element`](https://en.cppreference.com/w/cpp/algorithm/min_element.html) | `Forward It min_element( ForwardIt first, ForwardIt last)`| `first`, `last`: the pair of iterators defining the range of elements to examine. | Returns an iterator to the smallest element, or `last` if the range is empty. |
 
-### Iterators
+## Iterators
 Iterators act similarly to pointers. They "point" to elements in STL containers and can be used to traverse, access, and modify container contents.  
 Iterator types depend on the container (e.g., vectors use random-access iterators, lists use bidirectional iterators, etc).  
 Defined primarly in `<iterator>`.
 
-#### Some iterator-related functions
+### Some iterator-related functions
 | Function/iterator | Declaration | Parameters | Description |
 |-----------|-------------|-------------|-------------|
 | [`std::distance`](https://en.cppreference.com/w/cpp/iterator/distance.html) | `typename std::iterator_traits<InputIt>::difference_type distance( InputIt first, InputIt last )`| `first`, `last`: the pair of iterators defining the range of elements to examine. | Returns how many increments are needed to go from `first` to `last`. Effectively, the number of elements in the range. |
