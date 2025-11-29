@@ -63,10 +63,17 @@ Container adaptors provide a simplified interface built on top of existing seque
 
 ### Containers used in Module 08
 #### [`std::vector`](https://en.cppreference.com/w/cpp/container/vector.html)
-Explicar brevemente caracteristicas ppales de vector.  
+**`std::vector `** is a **sequence container** that stores elements in **contiguous memory**, providing dynamic array functionality. 
+  Characteristics:
+  - Fully **contigous memory**
+  - **Fast random access** (`operator[]`)
+  - **Dinamic resizing**: you can pre-allocate with `reserve()` and it automatically grows when needed.
+  - **Efficient insertions** at the end (`push_back()`)
+  - **Iteration stability**: iterators remain valid unless the vector beyond capacity or elements are erased/moved
+  - Works very well with algorithms from `<algorithm>`
 
-Used in **ex00 (Span)** for storing integers.  
-Why `vector` is suitable:
+Used in **ex00 (Span)** to store integers.  
+Why `vector` is suitable for *Span*:
 - Allows pre-allocation with `reserve()`.
 - Allows element insertion via `push_back()`and `insert()`
 - It provides `size()` for tracking the number of stored elements
@@ -75,48 +82,51 @@ Why `vector` is suitable:
 
 #### [`std::stack`](https://en.cppreference.com/w/cpp/container/stack.html)
 `std::stack` is a **container adaptor** that gives the programmer the functionality of a stack - **LIFO (last-in, first-out)** data structure -.  
-As it is typically backed by `std::deque<T>` by default, `std::stack` is used in **ex02 (MutantStack)** to create a stack with iterator access (our MutantStack inhertis from std::stack).  EPXLICAR QUE Los iteradores de stack no son accesibles directamente, pero el contenedor subyacente, que se llama c (member object tipo protected en std::stack), sí los tiene. 
-
-To expose the iterator of the unferlying container:  
+Used in **ex02 (MutantStack)** to build a stack with iterator support.  
+- `std::stack` **does not expose iterators**.
+- However, the underlying container (accesible as the protected member `c`) is typically a `std::deque<T>`, which does provide iterators. 
+- To expose the iterators of the underlying countainer, MutantStack inhertis from `std::stack` and uses:
 
     typedef typename std::stack<T>::container_type::iterator iterator
 
 Explanation:  
-`std::stack<T>container_type` is the protected type of the internal container.
-`::iterator` acceses its iterator type.
+- `std::stack<T>container_type` is the protected type alias refering to the internal container (`std::deque<T>`).
+- `::iterator` gives access to that container's iterator type
+- MutantStack exposes these iterators through public `begin()` and `end()` methods
 
 ### Algorithms
-STL algorithms are defined mainly in `<algorithm>`and `<numeric>`. They operatoe on **iterator ranges**, not containers, which is what makes them generic.  
+STL algorithms are defined mainly in `<algorithm>`and `<numeric>`. They operate on **iterator ranges** (`[first, last]`), not containers, which is what makes them generic.  
 Common algorithms include:
-- `sort`: sort a range
-- `find`: locate a value
-- `count`: count occurences
-- `reverse`: reverse a range
-- `accumulate`: computa la suma de todos los elementos en un rango
-- `unique`: borra elementos duplicados consecutivos
-- `lower bound`: devuelve el iterador al primer elemento > o = valor en un rango ordenado
-- `upper bound`: devuelve el iterador al primer elemento mayor que el valor en un rango ordenado
-- `replace`: reemplaza todas las ocurrencias de un valor con nuevo valor en un rango dado.
+- `sort`: sorts a range
+- `find`: searches for a value
+- `count`: counts occurences
+- `reverse`: reverses a range
+- `accumulate`: computes the sum of a range
+- `unique`: removes consecutive duplicates
+- `lower_bound`: finds the first element >= a given value in a sorted range
+- `upper_bound`: finds the first element > a given value in a sorted range
+- `replace`: replaces all occurences of a value
 
 #### Algorithms used in Module 08
 
 | Algorithm | Declaration | Parameters | Description |
 |-----------|-------------|-------------|-------------|
-| [`std::find`](https://en.cppreference.com/w/cpp/algorithm/find.html) | `InputIt find( InputIt first, InputIt last, const T& value )`| `first`, `last`: the pair of iterators defining the range of elements to examine. `value`: value to comare the elements to. | Devuelve un iterator al primer elemento en el rango [first, last] que coincida con value, o last si no hay concidencias. |
+| [`std::find`](https://en.cppreference.com/w/cpp/algorithm/find.html) | `InputIt find( InputIt first, InputIt last, const T& value )`| `first`, `last`: the pair of iterators defining the range of elements to examine. `value`: value to comare the elements to. | Returns an iterator to the first element equal to `value` in the range [first, last]`, or `last` if no match is found. |
 | [`std::sort`](https://en.cppreference.com/w/cpp/algorithm/sort.html) | `void sort( RandomIt first, RandomIt last )`| `first`, `last`: the pair of iterators defining the range of elements to sort.| Sorts the elements in the range [first, last] in non-descending order. The order of equal elements is not guaranteed to be preserved.|
-| [`std::max_element`](https://en.cppreference.com/w/cpp/algorithm/max_element.html) | `Forward It max_element( ForwardIt first, ForwardIt last)`| `first`, `last`: the pair of iterators defining the range of elements to examine. | Devuelve el iterator al elemento de mayor valor en el rango [first, last]. Si hay múltiples elementos que tienen el valor máximo, devuelve el primero de ellos. Devuelve last si el rango está vacío. |
-| [`std::min_element`](https://en.cppreference.com/w/cpp/algorithm/min_element.html) | `Forward It min_element( ForwardIt first, ForwardIt last)`| `first`, `last`: the pair of iterators defining the range of elements to examine. | Devuelve el iterator al elemento de menor valor en el rango [first, last]. Si hay múltiples elementos que tienen el valor mínimo, devuelve el primero de ellos. Devuelve last si el rango está vacío. |
+| [`std::max_element`](https://en.cppreference.com/w/cpp/algorithm/max_element.html) | `Forward It max_element( ForwardIt first, ForwardIt last)`| `first`, `last`: the pair of iterators defining the range of elements to examine. | Returns an iterator to the largest element in the range `[first, last]`, or `last if the range is empty. |
+| [`std::min_element`](https://en.cppreference.com/w/cpp/algorithm/min_element.html) | `Forward It min_element( ForwardIt first, ForwardIt last)`| `first`, `last`: the pair of iterators defining the range of elements to examine. | Returns an iterator to the smallest element, or `last` if the range is empty. |
 
 ### Iterators
-Los iteradores son los punteros que se usan para apuntar a las direcciones de memoria de los containers STL. Se encuentran en el header <iterator>.   
-- Los diferentes containers tienen diferentes tipos de iteradores
+Iterators act similarly to pointers. They "point" to elements in STL containers and can be used to traverse, access, and modify container contents.  
+Iterator types depend on the container (e.g., vectors use random-access iterators, lists use bidirectional iterators, etc).  
+Defined primarly in `<iterator>`.
 
-#### Algunas funciones relacionadas con iteradores
+#### Some iterator-related functions
 | Function/iterator | Declaration | Parameters | Description |
 |-----------|-------------|-------------|-------------|
-| [`std::distance`](https://en.cppreference.com/w/cpp/iterator/distance.html) | `typename std::iterator_traits<InputIt>::difference_type distance( InputIt first, InputIt last )`| `first`, `last`: the pair of iterators defining the range of elements to examine. | Devuelve el número de incrementos necesarios paar ir de first a last, es decir, el número de elementos en el rango. |
-| [`begin`](https://en.cppreference.com/w/cpp/container/vector/begin.html) | `iterator begin()`, `const_iterator begin()`|  | Returns an iterator to the first element of `*this`|
-| [`end`](https://en.cppreference.com/w/cpp/container/vector/end.html) | `iterator end()`, `const_iterator end()`|  | Returns an iterator past the last element of`*this`|
+| [`std::distance`](https://en.cppreference.com/w/cpp/iterator/distance.html) | `typename std::iterator_traits<InputIt>::difference_type distance( InputIt first, InputIt last )`| `first`, `last`: the pair of iterators defining the range of elements to examine. | Returns how many increments are needed to go from `first` to `last`. Effectively, the number of elements in the range. |
+| [`begin`](https://en.cppreference.com/w/cpp/container/vector/begin.html) | `iterator begin()`, `const_iterator begin()`| - | Returns an iterator to the first element of `*this`|
+| [`end`](https://en.cppreference.com/w/cpp/container/vector/end.html) | `iterator end()`, `const_iterator end()`| - | Returns an iterator past the last element of`*this` (one-past-the-end) |
 
 
 ## More info
